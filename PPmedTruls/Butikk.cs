@@ -7,15 +7,17 @@ namespace PPmedTruls
         //Dette er for produkter med navn og evnt nr
         public string Name;
         public string Type;
-        public static List<Employee> Employees;
-        public static List<Produkt> Produkter;
+        public int EmployeesId;
+        public List<Employee> Employees;
+        public List<Produkt> Produkter;
 
-        public Butikk(string name, string type)
+        public Butikk(string name, string type, List<Produkt> produkter)
         {
             Name = name;
             Type = type;
             Produkter = new List<Produkt>();
             Employees = new List<Employee>();
+            initProducts(produkter);
         }
 
         public Butikk()
@@ -23,27 +25,29 @@ namespace PPmedTruls
 
         }
 
+        public void initProducts(List<Produkt> produkter)
+        {
+            foreach (var produkt in produkter)
+            {
+                AddProducts(produkt);
+            }
+           
+        }
+
         public void RunStore()
         {
             //Dette skal kjøre alle funksjonene i butikk.
-
+            Console.Clear();
             ShowProducts();
-
-            //ShowEmployees();
-            
+            ShowEmployees();          
         }
-
-        
+     
         private void ShowProducts()
         {
-            //Produkt MYprodukt = new Produkt(1, 5, "Tshirt", "Nike Tshirt", 100);
-            //Produkt andreProdukt = new Produkt(2, 7, "Ball", "Basketball", 500);
-            //Butikk.Produkter.Add(MYprodukt);
-            //Butikk.Produkter.Add(andreProdukt);
 
-             foreach (var item in Produkter)
+             foreach (var produkt in Produkter)
              {
-                item.ShowProductDetails();
+                 produkt.ShowDetails();
              }
             Console.WriteLine();
         }
@@ -53,15 +57,36 @@ namespace PPmedTruls
             Produkter.Add(product);
         }
 
-        //private void ShowEmployees()
-        //{
+        public void GetEmployeeDetails()
+        {
+    
+            Console.WriteLine("Skriv navn:");
+            var ansattNavn = Console.ReadLine();
+            Console.WriteLine("Skriv stilling:");
+            var posisjon = Console.ReadLine();
+            Console.WriteLine("Skriv alder:");
+            int alder = int.Parse(Console.ReadLine());
+            AddEmployee(ansattNavn, posisjon, alder);
 
-        //    foreach (var item in Employees)
-        //    {
-        //        //Console.WriteLine($"Emplyee: {item.Name}");
-        //        item.ShowEmployeeDetails();
-        //    }
-        //}
+        }
+        public void AddEmployee(string employeeName, string position, int age)
+        {  
+            var employee = new Employee(employeeName, position, age, GenerateId()); 
+            Employees.Add(employee);
+        }
+        public int GenerateId()
+        {
+            EmployeesId++;
+            return EmployeesId;
+        }
+
+        private void ShowEmployees()
+        {
+            foreach (var employee in Employees)
+            {
+                employee.ShowDetails();
+            }
+        }
 
 
     }

@@ -19,7 +19,7 @@
             Price = price;
         }
 
-        public void ShowProductDetails()
+        public void ShowDetails()
         {
             Console.WriteLine($"Id: {Id} | Name: {Name} | Count: {Count} | Descriptions: {Description} | Price: {Price:c2}");
         }

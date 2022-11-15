@@ -5,7 +5,6 @@ namespace PPmedTruls
 {
     public class Employee
     {
-
         //For alle folk som jobber i butikken.
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,7 +13,7 @@ namespace PPmedTruls
 
         public int Age;
 
-        public Employee(int id, string name, string jobPosition, int age)
+        public Employee(string name, string jobPosition, int age, int id)
         {
             Id = id;
             Name = name;
@@ -23,30 +22,11 @@ namespace PPmedTruls
         }
         public Employee()
         {
-
         }
 
-        public void RunEmployees()
-        {     
-                     
-            MakeNewEmployees(); 
-        }
-
-        private void MakeNewEmployees()
+        public void ShowDetails()
         {
-            Employee Marija = new Employee(1, "Marija", "Sales", 33);
-            Employee Truls = new Employee(2, "Truls", "Service", 26);
-            ////List the new employees and store them in the list.
-            Butikk.Employees.Add(Marija);
-            Butikk.Employees.Add(Truls);
-            ShowEmployeeDetails(Marija);
-            ShowEmployeeDetails(Truls);
-
-        }
-
-        public void ShowEmployeeDetails(Employee employee)
-        {
-            Console.WriteLine($"Name: {employee.Name} Job Position: {employee.JobPosition} Age: {employee.Age}");
+            Console.WriteLine($"{Id}  | Name: {Name}  | Job Position: {JobPosition}  | Age: {Age}");
             
         }
     }
